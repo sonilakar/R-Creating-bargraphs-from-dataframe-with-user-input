@@ -23,35 +23,24 @@ enter_data <- function(){
   
 }
 
-input_data <- enter_data()
-
-number_of_rows <- unlist(input_data[1])
-color_for_bars  <- unlist(input_data[2])
-text_size <- unlist(input_data[3])
-text_color <- unlist(input_data[4])
-axis_color <- unlist(input_data[5])
-axis_font <- unlist(input_data[6])
-title_size <- unlist(input_data[7])
-title_name <- unlist(input_data[8])
-
-Data_for_bar_plot <- data.frame(Dimension = c("A", "B", "C"),
-                                Value = c(20, 30, 40))
-
-Data_for_bar_plot$Dimension <- as.character(Data_for_bar_plot$Dimension)
-
-for(i in 1:number_of_rows) {
+populate_dataframe <- function(number_of_rows){
   
-  Data_for_bar_plot[i, 1] <- readline(prompt="Enter the value for first column: ")
+  
+  Data_for_bar_plot <- data.frame(Dimension=character(),
+                                  Value=numeric(),
+                                  stringsAsFactors=FALSE) 
+  
+  for(i in 1:number_of_rows) {
+    
+    
+    Data_for_bar_plot[i, 1] <- readline(prompt="Enter the value for first column: ")
+    Data_for_bar_plot[i, 2] <- as.numeric(readline(prompt="Enter the value for second column: "))
+    
+  }
+  
+  return(Data_for_bar_plot)
   
 }
-
-for(i in 1:number_of_rows) {
-  
-  Data_for_bar_plot[i, 2] <- readline(prompt="Enter the value for second column: ")
-  
-}
-
-Data_for_bar_plot$Value <- as.numeric(Data_for_bar_plot$Value)
 
 
 bar_plot <- function(Data_for_bar_plot, number_of_rows, color_for_bars,
@@ -83,10 +72,15 @@ bar_plot <- function(Data_for_bar_plot, number_of_rows, color_for_bars,
           plot.title = element_text(hjust = 0.5, size = title_size, face="bold")) +
     
     ggtitle(title_name)
-  
-  #file_name <- paste(Data_for_bar_plot, "Bar plot.png", sep = "_")
-  
-  #ggsave(file_name, width=12, height=5)
 
+}
+
+{
+  
+input_data <- enter_data()
+Data_for_bar_plot <- populate_dataframe(unlist(input_data[1]))
+bar_plot(Data_for_bar_plot, unlist(input_data[1]), unlist(input_data[2]), unlist(input_data[3]),
+         unlist(input_data[4]), unlist(input_data[5]), unlist(input_data[6]),
+         unlist(input_data[7]), unlist(input_data[8]))
 }
 

@@ -55,7 +55,10 @@ bar_plot <- function(Data_for_bar_plot, number_of_rows, color_for_bars,
     geom_bar(position = position_dodge(width = .9), stat="identity" )+
     #geom_bar(position = "dodge", stat="identity" )+
     
-    scale_fill_manual(values = c("#AEB3B8", "#C68EA0", "#5C6670", "#8C1D40"),
+    
+    #----------------------------dark grey, sky blue, dark blue, light grey
+    #scale_fill_manual(values = c("#404041", "#00b3e7", "#003a79", "#939597"),
+    scale_fill_manual(values = c("#939597", "#00b3e7", "#404041", "#003a79"),
                       breaks=c("Member Non-sig", "Prospects Non-sig"), 
                       labels=c("Member", "Prospects"))+
     
